@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // This method is called when the app has loaded (after first viewDidLoad() of initial view)
         // Override point for customization after application launch.
         return true
     }
