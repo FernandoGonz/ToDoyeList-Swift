@@ -14,6 +14,7 @@
 		4DDBC2DD283EA343003FE951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DDBC2DC283EA343003FE951 /* Assets.xcassets */; };
 		4DDBC2E0283EA343003FE951 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DDBC2DE283EA343003FE951 /* LaunchScreen.storyboard */; };
 		4DDBC2EB283EA740003FE951 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDBC2EA283EA740003FE951 /* Constants.swift */; };
+		4DF053D6284E9268005C663C /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF053D5284E9268005C663C /* CategoryViewController.swift */; };
 		4DFD29732847C7E4004E6AB4 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4DFD29712847C7E4004E6AB4 /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		4DDBC2DF283EA343003FE951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4DDBC2E1283EA343003FE951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DDBC2EA283EA740003FE951 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4DF053D5284E9268005C663C /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		4DFD29722847C7E4004E6AB4 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				4DDBC2D7283EA33E003FE951 /* ViewController.swift */,
+				4DF053D5284E9268005C663C /* CategoryViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 				4DDBC2D4283EA33E003FE951 /* AppDelegate.swift in Sources */,
 				4DFD29732847C7E4004E6AB4 /* DataModel.xcdatamodeld in Sources */,
 				4DDBC2D6283EA33E003FE951 /* SceneDelegate.swift in Sources */,
+				4DF053D6284E9268005C663C /* CategoryViewController.swift in Sources */,
 				4DDBC2EB283EA740003FE951 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

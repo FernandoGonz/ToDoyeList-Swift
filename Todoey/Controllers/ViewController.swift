@@ -13,11 +13,18 @@ class ViewController: UITableViewController {
     let context: NSManagedObjectContext? = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     var itemArray: [Item] = []
     
+    // Attribute that gets the value from the CategoryViewController (throgh segue)
+    var selectedCategory: Category? {
+        didSet { // once this attribute has a value, execute all into brackets
+            self.loadItems()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.loadItems()
     }
+    
+    //MARK: - Data Manipulation Methods
     
     /// This function allows to save a new Item into CoreData model
     /// ```
@@ -36,14 +43,24 @@ class ViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    private func loadItems() {
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
+    /// This function allows to read items from the CoreDate model throgh a fetch request
+    private func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+        // If this method is called without argument, Item.fetchRequest() is the default fetch request and gets all elements in the DB (without filters or sortDesription)
+        
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", self.selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
         
         do {
             self.itemArray = try self.context!.fetch(request)
         } catch {
             print("Error fetching data from context \(error)")
         }
+        tableView.reloadData()
     }
     
     //MARK: - Add New Item
@@ -60,12 +77,11 @@ class ViewController: UITableViewController {
             let item: Item = Item(context: self.context!)
             item.title = textField.text!
             item.done = false
+            item.parentCategory = self.selectedCategory
             self.itemArray.append(item)
             
-            self.saveItem()
-            
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.saveItem()
             }
         }
         
@@ -134,14 +150,23 @@ extension ViewController: UISearchBarDelegate {
             
             request.sortDescriptors = [sortDescriptor]
             
-            // Updating data from the context (BD) with the filter
-            do {
-                try self.context!.save()
-            } catch {
-                print("Error saving item into DataModel \(error)")
+            // Fetching data from the context (BD) with the filter
+            self.loadItems(with: request)
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // This method will triggered each there is a change into UISearchBarView
+        if searchBar.text?.count == 0 {
+            // Loading items again
+            self.loadItems()
+            
+            // For quit focus (cursor) from the searchBar and hide the keyboard
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
             }
             
-            tableView.reloadData()
+            
         }
     }
 }
